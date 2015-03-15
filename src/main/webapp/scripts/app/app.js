@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('semanticjsApp', ['LocalStorageModule', 'tmh.dynamicLocale',
-    'ngResource', 'ui.router', 'ngCookies', 'pascalprecht.translate', 'ngCacheBuster', 'infinite-scroll'])
+angular.module('semanticjsApp', ['angularFileUpload','LocalStorageModule', 'tmh.dynamicLocale',
+    'ngResource', 'ui.router', 'ngCookies', 'pascalprecht.translate', 'ngCacheBuster', 'infinite-scroll','ngCsvImport','hljs'])
 
     .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION) {
         $rootScope.ENV = ENV;

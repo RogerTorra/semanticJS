@@ -1,0 +1,136 @@
+<div>
+
+    <h2 translate="App.docs.home.title">Docs</h2>
+
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveDocsModal" ng-click="clear()">
+        <span class="glyphicon glyphicon-flash"></span> <span translate="App.docs.home.createLabel">Create a new Docs</span>
+    </button>
+    <div class="modal fade" id="saveDocsModal" tabindex="-1" role="dialog" aria-labelledby="myDocsLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="editForm" role="form" novalidate
+                      class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+                      ng-submit="create()">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" id="myDocsLabel" translate="App.docs.home.createOrEditLabel">Create or edit a Docs</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>ID</label>
+                            <input type="text" class="form-control" name="id"
+                                   ng-model="docs.id" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label translate="App.docs.name">Name</label>
+                            <input type="text" class="form-control" name="name"
+                                   ng-model="docs.name">
+                        </div>
+                        <div class="form-group">
+                            <label translate="App.docs.description">Description</label>
+                            <input type="text" class="form-control" name="description"
+                                   ng-model="docs.description">
+                        </div>
+                        <div class="form-group">
+                            <label translate="App.docs.date_created">Date_created</label>
+                            <input type="text" class="form-control" name="date_created"
+                                   ng-model="docs.date_created">
+                        </div>
+                        <div class="form-group">
+                            <label translate="App.docs.type">Type</label>
+                            <input type="text" class="form-control" name="type"
+                                   ng-model="docs.type">
+                        </div>
+                        <div class="form-group">
+                            <label translate="App.docs.content">Content</label>
+                            <input type="text" class="form-control" name="content"
+                                   ng-model="docs.content">
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteDocsConfirmation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="deleteForm" ng-submit="confirmDelete(docs.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p translate="App.docs.delete.question" translate-values="{id: '{{docs.id}}'}">Are you sure you want to delete this Docs?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th translate="App.docs.name">Name</th>
+                    <th translate="App.docs.description">Description</th>
+                    <th translate="App.docs.date_created">Date_created</th>
+                    <th translate="App.docs.type">Type</th>
+                    <th translate="App.docs.content">Content</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="docs in docss">
+                    <td><a ui-sref="docsDetail({id:docs.id})">{{docs.id}}</a></td>
+                    <td>{{docs.name}}</td>
+                    <td>{{docs.description}}</td>
+                    <td>{{docs.date_created}}</td>
+                    <td>{{docs.type}}</td>
+                    <td>{{docs.content}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="docsDetail({id:docs.id})"
+                                class="btn btn-info">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
+                        </button>
+                        <button type="submit"
+                                ng-click="update(docs.id)"
+                                class="btn btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ng-click="delete(docs.id)"
+                                class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
